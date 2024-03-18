@@ -14,19 +14,19 @@ LCAF_ENV_FILE = .lcafenv
 -include $(LCAF_ENV_FILE)
 
 # this will always point here
-REPO_MANIFESTS_URL ?= https://github.com/nexient-llc/launch-common-automation-framework.git
+REPO_MANIFESTS_URL ?= https://github.com/launchbynttdata/launch-common-automation-framework.git
 # this  will point to a git tag
 REPO_MANIFESTS_REVISION ?= refs/tags/0.1.3
 # this should point to a seed manifest
 REPO_MANIFESTS_PATH ?= manifests/terraform_modules/seed/manifest.xml
 
 # Settings to pull in Launch version of (google) repo utility that supports environment substitution:
-REPO_URL ?= https://github.com/nexient-llc/git-repo.git
+REPO_URL ?= https://github.com/launchbynttdata/git-repo.git
 REPO_REV ?= main
 export REPO_REV REPO_URL
 
 # Example variable to substituted after init, but before sync in repo manifests.
-GITBASE ?= https://github.com/nexient-llc/
+GITBASE ?= https://github.com/launchbynttdata/
 export GITBASE
 
 # Include project level defaults (env vars, etc.)

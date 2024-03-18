@@ -2,13 +2,13 @@
 
 ## Overview
 
-This repository is used to seed component dependencies of another repository (e.g. a Terraform module) and is applied using the [repo](https://gerrit.googlesource.com/git-repo/) utility.  Launch has updated the `repo` utility to allow for substituting environment variables in the manifests to allow for more dynamic behavior. Our updated copy of the tool can be [found here](https://github.com/nexient-llc/git-repo).
+This repository is used to seed component dependencies of another repository (e.g. a Terraform module) and is applied using the [repo](https://gerrit.googlesource.com/git-repo/) utility.  Launch has updated the `repo` utility to allow for substituting environment variables in the manifests to allow for more dynamic behavior. Our updated copy of the tool can be [found here](https://github.com/launchbynttdata/git-repo).
 
 ## LCAF Components and Modules
 
 - A **component** is a repository that covers platform-level concerns that apply across many repositories. These are all prefixed with `lcaf-component-` in their name and are typically only referenced through this entrypoint (the `launch-common-automation-framework` repository and its manifests).
 
-- A **module** is an individual repository that represents a piece of software, a cloud resource defined by an IaC tool, or in some cases, an IaC helper used to provide functionality to other IaC modules (such as the [resource_name](https://github.com/nexient-llc/tf-module-resource_name) helper for Terraform). Modules utilize components to provide platform-level functionality that is shared across many modules.
+- A **module** is an individual repository that represents a piece of software, a cloud resource defined by an IaC tool, or in some cases, an IaC helper used to provide functionality to other IaC modules (such as the [resource_name](https://github.com/launchbynttdata/tf-module-resource_name) helper for Terraform). Modules utilize components to provide platform-level functionality that is shared across many modules.
 
 ## Authentication
 
@@ -30,14 +30,14 @@ The relevant variables to changing synchronization/manifest behavior in the [sam
 
 ```
 # Normally this will point to this repository, except in cases where you choose to self-host a fork.
-REPO_MANIFESTS_URL ?= https://github.com/nexient-llc/launch-common-automation-framework.git
+REPO_MANIFESTS_URL ?= https://github.com/launchbynttdata/launch-common-automation-framework.git
 # Typically points at a git tag, but in special cases you can use this to point to a branch or a specific commit hash
 REPO_MANIFESTS_REVISION ?= refs/tags/0.1.3
 # This should always point at a seed manifest that then includes other manifests
 REPO_MANIFESTS_PATH ?= manifests/terraform_modules/seed/manifest.xml
 
 # The following settings tell the repo tool to pull in Launch version of itself:
-REPO_URL ?= https://github.com/nexient-llc/git-repo.git
+REPO_URL ?= https://github.com/launchbynttdata/git-repo.git
 REPO_REV ?= main
 ```
 
@@ -65,8 +65,8 @@ Once `make configure` has successfully completed, you will have additional `make
 
 ## Notes
 
-* The Makefile under examples/ is a good starting place for developing a new class of modules by creating a new skeleton, but most of the time, your initial Makefile will come from a [skeleton repository](https://github.com/nexient-llc/tf-module-skeleton) that includes instructions on how to bootstrap it into an LCAF module.
+* The Makefile under examples/ is a good starting place for developing a new class of modules by creating a new skeleton, but most of the time, your initial Makefile will come from a [skeleton repository](https://github.com/launchbynttdata/tf-module-skeleton) that includes instructions on how to bootstrap it into an LCAF module.
 
 * For Bitbucket, you *must* define your Bitbucket credentials in your `~/.netrc` and that *must* use an HTTP access token.  Also, that token *must* have some expiration date, otherwise Bitbucket will lock your account after a few accesses.
 
-* Additional platform documentation can be [found here](https://github.com/nexient-llc/common-platform-documentation).
+* Additional platform documentation can be [found here](https://github.com/launchbynttdata/common-platform-documentation).
