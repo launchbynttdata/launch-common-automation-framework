@@ -16,7 +16,7 @@ LCAF_ENV_FILE = .lcafenv
 # this will always point here
 REPO_MANIFESTS_URL ?= https://github.com/launchbynttdata/launch-common-automation-framework.git
 # this  will point to a git tag
-REPO_MANIFESTS_REVISION ?= refs/tags/0.1.3
+REPO_MANIFESTS_REVISION ?= refs/tags/1.0.0
 # this should point to a seed manifest
 REPO_MANIFESTS_PATH ?= manifests/terraform_modules/seed/manifest.xml
 

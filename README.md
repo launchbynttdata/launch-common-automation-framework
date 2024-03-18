@@ -32,7 +32,7 @@ The relevant variables to changing synchronization/manifest behavior in the [sam
 # Normally this will point to this repository, except in cases where you choose to self-host a fork.
 REPO_MANIFESTS_URL ?= https://github.com/launchbynttdata/launch-common-automation-framework.git
 # Typically points at a git tag, but in special cases you can use this to point to a branch or a specific commit hash
-REPO_MANIFESTS_REVISION ?= refs/tags/0.1.3
+REPO_MANIFESTS_REVISION ?= refs/tags/1.0.0
 # This should always point at a seed manifest that then includes other manifests
 REPO_MANIFESTS_PATH ?= manifests/terraform_modules/seed/manifest.xml
 
