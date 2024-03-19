@@ -65,7 +65,7 @@ Once `make configure` has successfully completed, you will have additional `make
 
 ## Notes
 
-* The Makefile under examples/ is a good starting place for developing a new class of modules by creating a new skeleton, but most of the time, your initial Makefile will come from a [skeleton repository](https://github.com/launchbynttdata/tf-module-skeleton) that includes instructions on how to bootstrap it into an LCAF module.
+* The Makefile under examples/ is a good starting place for developing a new class of modules by creating a new skeleton, but most of the time, your initial Makefile will come from a [skeleton repository](https://github.com/launchbynttdata/lcaf-skeleton-terraform) that includes instructions on how to bootstrap it into an LCAF module.
 
 * For Bitbucket, you *must* define your Bitbucket credentials in your `~/.netrc` and that *must* use an HTTP access token.  Also, that token *must* have some expiration date, otherwise Bitbucket will lock your account after a few accesses.
 
