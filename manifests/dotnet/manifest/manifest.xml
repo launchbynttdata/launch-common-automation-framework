@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This manifest defines the behavior of standalone .NET components
+-->
+<manifest>
+  <project name="lcaf-component-dotnet" path="components/dotnet" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${DOTNET_VER}'>
+    <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
+    <linkfile src="linkfiles/.secrets.baseline" dest=".secrets.baseline" />
+    <linkfile src="linkfiles/.tool-versions" dest=".tool-versions" />
+  </project>
+</manifest>
