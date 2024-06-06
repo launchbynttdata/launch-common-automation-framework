@@ -4,6 +4,9 @@
 -->
 <manifest>
   <project name="lcaf-component-container" path="components/container" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${CONTAINER_VER}'>
-    <linkfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
+    <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
+    <linkfile src="linkfiles/.secrets.baseline" dest=".secrets.baseline" />
+  </project>
+  <project name="lcaf-component-policy" path="components/policy" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${POLICY_VER}'>
   </project>
 </manifest>
