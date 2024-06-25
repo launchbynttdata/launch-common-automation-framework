@@ -6,7 +6,7 @@
   <project name="lcaf-component-container" path="components/container" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${CONTAINER_VER}'>
     <linkfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
   </project>
-  <project name="lcaf-component-provider_aws-pipeline_aws" path="components/module" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${PIPELINES_VER}'>
+  <project name="lcaf-component-provider_aws-pipeline_aws" path="components/module" remote="launch-dso-platform" revision="fix/echo-statements" dso_override_attribute_revision='${PIPELINES_VER}'>
     <!-- Common -->
     <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/codebuild-status.sh" dest="components/build-actions/codebuild-status" />
     <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/pre-deploy-test.sh" dest="components/build-actions/pre-deploy-test" />
