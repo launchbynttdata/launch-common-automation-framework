@@ -7,5 +7,5 @@
 
   <include name="manifests/platform/seed/manifest.xml" />
 
-  <include name="manifests/containers/java/wildfly/manifest/manifest.xml" />
+  <include name="manifests/containers/java/manifest/manifest.xml" />
 </manifest>
