@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This manifest defines the behavior of standalone Javascript components
+-->
+<manifest>
+  <project name="lcaf-component-container" path="components/module" remote="launch-dso-platform" revision="refs/tags/1.1.1" dso_override_attribute_revision='${CONTAINER_VER}'>
+    <linkfile src="linkfiles/Makefile" dest="components/Makefile" />
+    <linkfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
+    <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
+    <linkfile src="linkfiles/.golangci.yaml" dest=".golangci.yaml" />
+  </project>
+</manifest>
