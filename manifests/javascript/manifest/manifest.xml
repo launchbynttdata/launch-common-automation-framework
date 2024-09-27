@@ -3,7 +3,7 @@
     This manifest defines the behavior of standalone Javascript components
 -->
 <manifest>
-  <project name="lcaf-component-javascript" path="components/javascript" remote="launch-dso-platform" revision="refs/tags/1.2.0" dso_override_attribute_revision='${JAVASCRIPT_VER}'>
+  <project name="lcaf-component-javascript" path="components/javascript" remote="launch-dso-platform" revision="refs/tags/1.2.2" dso_override_attribute_revision='${JAVASCRIPT_VER}'>
     <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
     <linkfile src="linkfiles/.secrets.baseline" dest=".secrets.baseline" />
   </project>
