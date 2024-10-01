@@ -5,5 +5,5 @@
 <manifest>
   <include name="manifests/git-connection/manifest.xml" />
   <include name="manifests/platform/seed/manifest.xml" />
-  <include name="manifests/javascript/manifest/manifest.xml" />
+  <include name="manifests/containers/javascript/manifest/manifest.xml" />
 </manifest>
