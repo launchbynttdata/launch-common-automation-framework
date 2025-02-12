@@ -8,7 +8,7 @@ This repository is used to seed component dependencies of another repository (e.
 
 - A **component** is a repository that covers platform-level concerns that apply across many repositories. These are all prefixed with `lcaf-component-` in their name and are typically only referenced through this entrypoint (the `launch-common-automation-framework` repository and its manifests).
 
-- A **module** is an individual repository that represents a piece of software, a cloud resource defined by an IaC tool, or in some cases, an IaC helper used to provide functionality to other IaC modules (such as the [resource_name](https://github.com/launchbynttdata/tf-module-resource_name) helper for Terraform). Modules utilize components to provide platform-level functionality that is shared across many modules.
+- A **module** is an individual repository that represents a piece of software, a cloud resource defined by an IaC tool, or in some cases, an IaC helper used to provide functionality to other IaC modules (such as the [resource_name](https://github.com/launchbynttdata/tf-launch-module_library-resource_name) helper for Terraform). Modules utilize components to provide platform-level functionality that is shared across many modules.
 
 ## Authentication
 
