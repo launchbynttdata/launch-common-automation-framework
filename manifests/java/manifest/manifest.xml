@@ -3,7 +3,7 @@
     This manifest defines the behavior of standalone Java components
 -->
 <manifest>
-    <project name="lcaf-component-java" path="components/java" remote="launch-dso-platform" revision="refs/heads/main" dso_override_attribute_revision='${JAVA_VER}'>
+    <project name="lcaf-component-java" path="components/java" remote="launch-dso-platform" revision="refs/heads/initial-commit" dso_override_attribute_revision='${JAVA_VER}'>
         <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
     </project>
 </manifest>
