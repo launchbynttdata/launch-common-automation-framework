@@ -3,7 +3,7 @@
     This manifest defines the behavior of standalone Javascript library components
 -->
 <manifest>
-    <project name="lcaf-component-javascript-library" path="components/javascript-library" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${JAVASCRIPT_VER}'>
+    <project name="lcaf-component-javascript-library" path="components/javascript-library" remote="launch-dso-platform" revision="refs/tags/1.0.1" dso_override_attribute_revision='${JAVASCRIPT_VER}'>
         <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
     </project>
 </manifest>
