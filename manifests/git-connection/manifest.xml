@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This sets up the git connection and baselines
+    This manifest configures the git remote connection using the GITBASE environment variable.
+    The remote "launch-dso-platform" is referenced by all component project definitions.
 -->
 <manifest>
   <remote name="launch-dso-platform" fetch="${GITBASE}"/>

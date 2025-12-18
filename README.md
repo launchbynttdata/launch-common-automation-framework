@@ -12,19 +12,19 @@ This repository is used to seed component dependencies of another repository (e.
 
 ## Authentication
 
-This repository is publicly available and can be retrieved by the `repo` tool using anonymous access, however, we have run into scenarios where clients choose to host a private copy of this repository either on GitHub or in their SCM system of choice. In this scenario, you are responsible for configuring appropriate authentication prior to interacting with your fork of `launch-common-automation-framework`. 
+This repository is publicly available and can be retrieved by the `repo` tool using anonymous access, however, we have run into scenarios where clients choose to host a private copy of this repository either on GitHub or in their SCM system of choice. In this scenario, you are responsible for configuring appropriate authentication prior to interacting with your fork of `launch-common-automation-framework`.
 
 Typically, this is handled by creating records in your `~/.netrc` file to provide a login and password for the host in question. Documentation showing how to configure `.netrc` can be [found here](https://everything.curl.dev/usingcurl/netrc).
 
 ## Manifests
 
-Manifests define a composable structure of repositories and files that are synchronized into a repository when `repo init` is invoked by the `make configure` target. 
+Manifests define a composable structure of repositories and files that are synchronized into a repository when `repo init` is invoked by the `make configure` target.
 
-Our standard is to point the initial manifest target at a seed manifest, which then pulls in platform-level dependencies and sets up local files according to that manifest's type. 
+Our standard is to point the initial manifest target at a seed manifest, which then pulls in platform-level dependencies and sets up local files according to that manifest's type.
 
 For example, a [seed manifest for Terraform](manifests/terraform_modules/seed/manifest.xml) would pull in the [manifest necessary to set up a git connection](manifests/git-connection/manifest.xml), the [platform-level seed manifest](manifests/platform/seed/manifest.xml) (which in turn pulls in the [main platform manifest](manifests/platform/manifest/manifest.xml)), as well as the [main Terraform manifest](manifests/terraform_modules/manifest/manifest.xml) that contains configuration files and additional Make targets specific to Terraform.
 
-In general, new modules for a predefined type of LCAF module like Terraform are generated from either a skeleton repository (that will already have the correct manifest location built into the included Makefile), or via `launch-cli` tooling, but if you need to create a new skeleton or a one-off repository that utilizes LCAF, you will need to configure a Makefile. A [sample Makefile](examples/Makefile) is included with this repository to provide a starting point for development. 
+In general, new modules for a predefined type of LCAF module like Terraform are generated from either a skeleton repository (that will already have the correct manifest location built into the included Makefile), or via `launch-cli` tooling, but if you need to create a new skeleton or a one-off repository that utilizes LCAF, you will need to configure a Makefile. A [sample Makefile](examples/Makefile) is included with this repository to provide a starting point for development.
 
 The relevant variables to changing synchronization/manifest behavior in the [sample Makefile](examples/Makefile), are shown below:
 
@@ -62,6 +62,8 @@ For more information on `asdf-vm`, see [their documentation](https://asdf-vm.com
 You should execute `make configure` from the root of your repository and the `repo` tool will attempt to pull in files based on the manifest located at  `REPO_MANIFESTS_PATH` in the `REPO_MANIFESTS_REVISION` revision of the repository located at `REPO_MANIFESTS_URL`.
 
 Once `make configure` has successfully completed, you will have additional `make` targets available for use. The exact targets will depend on your choice of manifest; see the individual LCAF modules' tasks/ directories for information on which commands are available.
+
+**Note on File Management**: LCAF manifests use `<copyfile>` directives to copy configuration files (like `.tflint.hcl`, `.pre-commit-config.yaml`, and Makefiles) from component repositories into your module. This approach (rather than symbolic links) ensures better cross-platform compatibility, especially on Windows, and simplifies Git tracking of these files.
 
 ## Notes
 

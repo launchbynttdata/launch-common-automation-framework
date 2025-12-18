@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This manifest sets up semverbot components which is is a dependency of
-    anything in the Launch Platform space.
+    This manifest defines platform component dependencies for all Launch modules.
+    Provides semverbot and platform-level tooling for version management and CI/CD.
+    Files are copied into the consuming repository for easier management.
 -->
 <manifest>
   <project name="lcaf-component-platform" path="components/platform" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${PLATFORM_VER}'>
-    <linkfile src="linkfiles/Makefile" dest="components/Makefile" />
+    <copyfile src="linkfiles/Makefile" dest="components/Makefile" />
   </project>
 </manifest>
