@@ -1,8 +1,13 @@
-conftest 0.44.1
-golang 1.20.8
-golangci-lint 1.55.2
-pre-commit 3.3.3
-terraform 1.5.5
-terraform-docs 0.16.0
+# Example .tool-versions file for ASDF version manager
+# IMPORTANT: These versions are examples only. Always verify and use the latest
+# compatible versions for your specific project requirements before deployment.
+# Check each tool's documentation for current stable releases.
+conftest 0.56.0
+golang 1.25.5
+golangci-lint 2.7.2
+pre-commit 4.5.0
+regula 3.2.1 # https://github.com/launchbynttdata/asdf-regula
+terraform 1.14.1
+terraform-docs 0.20.0
 terragrunt 0.39.2
-tflint 0.48.0
+tflint 0.60.0

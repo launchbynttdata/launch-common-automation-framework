@@ -68,3 +68,12 @@ Temporary Items
 .apdisk
 
 .idea
+
+
+### Python
+__pycache__/
+.venv
+venv
+
+## general
+.env

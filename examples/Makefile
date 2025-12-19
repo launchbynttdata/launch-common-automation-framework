@@ -10,27 +10,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Include custom values from .lcafenv. Repository root is assumed to be the working directory.
+# Including overriding values in this file is preferred over modifying the contents below.
 LCAF_ENV_FILE = .lcafenv
 -include $(LCAF_ENV_FILE)
 
-# this will always point here
+# Source repository for repo manifests
 REPO_MANIFESTS_URL ?= https://github.com/launchbynttdata/launch-common-automation-framework.git
-# this  will point to a git tag
-REPO_MANIFESTS_REVISION ?= refs/tags/1.0.0
-# this should point to a seed manifest
-REPO_MANIFESTS_PATH ?= manifests/terraform_modules/seed/manifest.xml
+# Branch of source repository for repo manifests. Other tags not currently supported.
+REPO_BRANCH ?= refs/tags/1.8.1
+# Path to seed manifest in repository referenced in REPO_MANIFESTS_URL
+REPO_MANIFEST ?= manifests/terraform_modules/seed/manifest.xml
 
-# Settings to pull in Launch version of (google) repo utility that supports environment substitution:
+# Settings to pull in Nexient version of (google) repo utility that supports environment substitution:
 REPO_URL ?= https://github.com/launchbynttdata/git-repo.git
+# Branch of the repository referenced by REPO_URL to use
 REPO_REV ?= main
 export REPO_REV REPO_URL
 
 # Example variable to substituted after init, but before sync in repo manifests.
 GITBASE ?= https://github.com/launchbynttdata/
-export GITBASE
-
-# Include project level defaults (env vars, etc.)
--include Makefile.includes
+GITREV ?= main
+export GITBASE GITREV
 
 # Set to true in a pipeline context
 IS_PIPELINE ?= false
@@ -45,9 +46,20 @@ COMPONENTS_DIR = components
 
 MODULE_DIR ?= ${COMPONENTS_DIR}/module
 
+PYTHON3_INSTALLED = $(shell which python3 > /dev/null 2>&1; echo $$?)
+MISE_INSTALLED = $(shell which mise > /dev/null 2>&1; echo $$?)
+ASDF_INSTALLED = $(shell which asdf > /dev/null 2>&1; echo $$?)
+REPO_INSTALLED = $(shell which repo > /dev/null 2>&1; echo $$?)
+GIT_USER_SET = $(shell git config --get user.name > /dev/null 2>&1; echo $$?)
+GIT_EMAIL_SET = $(shell git config --get user.email > /dev/null 2>&1; echo $$?)
+
 .PHONY: configure-git-hooks
-configure-git-hooks:
+configure-git-hooks: configure-dependencies
+ifeq ($(PYTHON3_INSTALLED), 0)
 	pre-commit install
+else
+	$(error Missing python3, which is required for pre-commit. Install python3 and rerun.)
+endif
 
 ifeq ($(IS_PIPELINE),true)
 .PHONY: git-config
@@ -75,14 +87,33 @@ endef
 configure: git-auth
 endif
 
+.PHONY: configure-dependencies
+configure-dependencies:
+ifeq ($(MISE_INSTALLED), 0)
+	@echo "Installing dependencies using mise"
+	@awk -F'[ #]' '$$NF ~ /https/ {system("mise plugin install " $$1 " " $$NF " --yes")} $$1 ~ /./ {system("mise install " $$1 " " $$2 " --yes")}' ./.tool-versions
+else ifeq ($(ASDF_INSTALLED), 0)
+	@echo "Installing dependencies using asdf-vm"
+	@awk -F'[ #]' '$$NF ~ /https/ {system("asdf plugin add " $$1 " " $$NF)} $$1 ~ /./ {system("asdf plugin add " $$1 "; asdf install " $$1 " " $$2)}' ./.tool-versions
+else
+	$(error Missing supported dependency manager. Install asdf-vm (https://asdf-vm.com/) or mise (https://mise.jdx.dev/) and rerun)
+endif
+
 .PHONY: configure
 configure: configure-git-hooks
-	repo --color=never init --no-repo-verify \
+ifneq ($(and $(GIT_USER_SET), $(GIT_EMAIL_SET)), 0)
+	$(error Git identities are not set! Set your user.name and user.email using 'git config' and rerun)
+endif
+ifeq ($(REPO_INSTALLED), 0)
+	echo n | repo --color=never init --no-repo-verify \
 		-u "$(REPO_MANIFESTS_URL)" \
-		-b "$(REPO_MANIFESTS_REVISION)" \
-		-m "$(REPO_MANIFESTS_PATH)"
+		-b "$(REPO_BRANCH)" \
+		-m "$(REPO_MANIFEST)"
 	repo envsubst
 	repo sync
+else
+	$(error Missing Repo, which is required for platform sync. Install Repo (https://gerrit.googlesource.com/git-repo) and rerun.)
+endif
 
 # The first line finds and removes all the directories pulled in by repo
 # The second line finds and removes all the broken symlinks from removing things
@@ -99,3 +130,73 @@ init-clean:
 ifneq (,$(wildcard ./TEMPLATED_README.md))
 	mv TEMPLATED_README.md README.MD
 endif
+
+.PHONY: init-module
+init-module:
+	@echo "Initializing module from template..."
+	@REPO_URL=$$(git config --get remote.origin.url); \
+	if [ -z "$$REPO_URL" ]; then \
+		echo "Error: Could not determine git repository URL. Make sure this is a git repository with a remote origin."; \
+		exit 1; \
+	fi; \
+	echo "Repository URL: $$REPO_URL"; \
+	REPO_PATH=$$(echo $$REPO_URL | sed -E 's#(https://|git@)##' | sed -E 's#:#/#' | sed -E 's#\.git$$##'); \
+	echo "Repository Path: $$REPO_PATH"; \
+	MODULE_NAME=$$(basename $$REPO_URL .git); \
+	echo "Module Name: $$MODULE_NAME"; \
+	echo "Updating go.mod..."; \
+	sed -i.bak "s#github.com/launchbynttdata/tf-aws-module-template#$$REPO_PATH#g" go.mod && rm go.mod.bak; \
+	echo "Updating test files..."; \
+	find tests -type f -name "*.go" -exec sed -i.bak "s#github.com/launchbynttdata/tf-aws-module-template#$$REPO_PATH#g" {} \; -exec rm {}.bak \;; \
+	echo "Running go mod tidy..."; \
+	go mod tidy; \
+	echo ""; \
+	echo "Removing detect-secrets baseline..."; \
+	rm -f .secrets.baseline; \
+	echo "✓ Module initialization complete!"; \
+	echo ""; \
+	echo "Next steps:"; \
+	echo "  1. Review and update the module files (main.tf, variables.tf, outputs.tf)"; \
+	echo "  2. Update the examples in the examples/ directory"; \
+	echo "  3. Update test implementations in tests/testimpl/"; \
+	echo "  4. Run 'make configure' to set up your development environment"; \
+	echo "  5. Run 'make check' to validate your changes"
+
+.PHONY: secrets-baseline
+secrets-baseline:
+	@echo "Creating new detect-secrets baseline..."
+	detect-secrets scan > .secrets.baseline
+	@echo "✓ Secrets baseline created successfully!"
+	@echo "Review .secrets.baseline to ensure no false positives are included."
+
+## update-tool-versions: Update .tool-versions with latest versions (respects pinned versions)
+update-tool-versions:
+	@echo "Updating .tool-versions with latest versions..."
+	@if [ ! -f .tool-versions ]; then \
+		@echo "Error: .tool-versions file not found"; \
+		exit 1; \
+	fi
+	@cp .tool-versions .tool-versions.backup
+	@while IFS= read -r line; do \
+		if echo "$$line" | grep -q "#pinned"; then \
+			echo "$$line" >> .tool-versions.tmp; \
+			echo "Keeping pinned: $$line"; \
+		else \
+			tool=$$(echo "$$line" | awk '{print $$1}'); \
+			if [ -n "$$tool" ] && [ "$$tool" != "#" ]; then \
+				latest=$$(asdf latest "$$tool" 2>/dev/null || echo "unknown"); \
+				if [ "$$latest" != "unknown" ] && ! echo "$$latest" | grep -q "unable to load\|does not have\|unknown"; then \
+					echo "$$tool $$latest" >> .tool-versions.tmp; \
+					echo "Updated $$tool to $$latest"; \
+				else \
+					echo "$$line" >> .tool-versions.tmp; \
+					echo "Keeping $$line (no update available)"; \
+				fi; \
+			else \
+				echo "$$line" >> .tool-versions.tmp; \
+			fi; \
+		fi; \
+	done < .tool-versions
+	@mv .tool-versions.tmp .tool-versions
+	@echo "Updated .tool-versions successfully!"
+	@echo "Run 'asdf install' to install updated versions"

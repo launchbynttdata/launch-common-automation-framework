@@ -4,9 +4,9 @@
 -->
 <manifest>
   <project name="lcaf-component-container" path="components/container" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${CONTAINER_VER}'>
-    <linkfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
+    <copyfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
   </project>
   <project name="lcaf-component-python" path="components/python" remote="launch-dso-platform" revision="refs/tags/1.0.0" dso_override_attribute_revision='${PYTHON_VER}'>
-    <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
+    <copyfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
   </project>
 </manifest>

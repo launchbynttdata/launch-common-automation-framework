@@ -4,38 +4,38 @@
 -->
 <manifest>
   <project name="lcaf-component-container" path="components/container" remote="launch-dso-platform" revision="refs/tags/1.3.2" dso_override_attribute_revision='${CONTAINER_VER}'>
-    <linkfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
+    <copyfile src="linkfiles/Makefile.container.includes" dest="Makefile.container.includes" />
   </project>
   <project name="lcaf-component-provider_aws-pipeline_aws" path="components/module" remote="launch-dso-platform" revision="refs/tags/1.4.0" dso_override_attribute_revision='${PIPELINES_VER}'>
     <!-- Common -->
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/codebuild-status.sh" dest="components/build-actions/codebuild-status" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/pre-deploy-test.sh" dest="components/build-actions/pre-deploy-test" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/simulated-merge.sh" dest="components/build-actions/simulated-merge" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/terragrunt-deploy.sh" dest="components/build-actions/terragrunt-deploy" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/terragrunt-plan.sh" dest="components/build-actions/terragrunt-plan" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/tf-post-deploy-functional-test.sh" dest="components/build-actions/tf-post-deploy-functional-test" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/trigger-pipeline.sh" dest="components/build-actions/trigger-pipeline" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/codebuild-status.sh" dest="components/build-actions/codebuild-status" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/pre-deploy-test.sh" dest="components/build-actions/pre-deploy-test" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/simulated-merge.sh" dest="components/build-actions/simulated-merge" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/terragrunt-deploy.sh" dest="components/build-actions/terragrunt-deploy" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/terragrunt-plan.sh" dest="components/build-actions/terragrunt-plan" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/tf-post-deploy-functional-test.sh" dest="components/build-actions/tf-post-deploy-functional-test" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/common/scripts/spec_scripts/actions/codebuild/trigger-pipeline.sh" dest="components/build-actions/trigger-pipeline" />
     <!-- Docker -->
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/build-container.sh" dest="components/build-actions/build-container" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/conftest-docker.sh" dest="components/build-actions/conftest-docker" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/push-container.sh" dest="components/build-actions/push-container" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/tag-container.sh" dest="components/build-actions/tag-container" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/build-container.sh" dest="components/build-actions/build-container" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/conftest-docker.sh" dest="components/build-actions/conftest-docker" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/push-container.sh" dest="components/build-actions/push-container" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/docker/scripts/spec_scripts/actions/codebuild/tag-container.sh" dest="components/build-actions/tag-container" />
     <!-- IaC -->
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/launch-apply-semver.sh" dest="components/build-actions/launch-apply-semver" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/launch-predict-semver.sh" dest="components/build-actions/launch-predict-semver" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/lint-terraform-module.sh" dest="components/build-actions/lint-terraform-module" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/make-check.sh" dest="components/build-actions/make-check" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/launch-apply-semver.sh" dest="components/build-actions/launch-apply-semver" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/launch-predict-semver.sh" dest="components/build-actions/launch-predict-semver" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/lint-terraform-module.sh" dest="components/build-actions/lint-terraform-module" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/iac/terraform-framework/scripts/spec_scripts/actions/codebuild/make-check.sh" dest="components/build-actions/make-check" />
     <!-- Java -->
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/java/mvn/scripts/spec_scripts/actions/codebuild/maven-build.sh" dest="components/build-actions/maven-build" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/java/mvn/scripts/spec_scripts/actions/codebuild/maven-test.sh" dest="components/build-actions/maven-test" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/java/mvn/scripts/spec_scripts/actions/codebuild/maven-build.sh" dest="components/build-actions/maven-build" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/java/mvn/scripts/spec_scripts/actions/codebuild/maven-test.sh" dest="components/build-actions/maven-test" />
     <!-- Python -->
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/python/scripts/spec_scripts/actions/codebuild/python-integration-tests.sh" dest="components/build-actions/python-integration-tests" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/python/scripts/spec_scripts/actions/codebuild/python-unit-tests.sh" dest="components/build-actions/python-unit-tests" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/python/scripts/spec_scripts/actions/codebuild/python-integration-tests.sh" dest="components/build-actions/python-integration-tests" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/python/scripts/spec_scripts/actions/codebuild/python-unit-tests.sh" dest="components/build-actions/python-unit-tests" />
     <!-- Service-Platforms -->
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/auto-qa.sh" dest="components/build-actions/auto-qa" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/certify-image.sh" dest="components/build-actions/certify-image" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/deploy-ecr-image.sh" dest="components/build-actions/deploy-ecr-image" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/integration-test.sh" dest="components/build-actions/integration-test" />
-    <linkfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/publish-ecr-image.sh" dest="components/build-actions/publish-ecr-image" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/auto-qa.sh" dest="components/build-actions/auto-qa" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/certify-image.sh" dest="components/build-actions/certify-image" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/deploy-ecr-image.sh" dest="components/build-actions/deploy-ecr-image" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/integration-test.sh" dest="components/build-actions/integration-test" />
+    <copyfile src="linkfiles/pipeline_providers/aws/aws_pipeline-to-aws_cloud/codebuild/service-platforms/ecs-platform/scripts/spec_scripts/actions/codebuild/publish-ecr-image.sh" dest="components/build-actions/publish-ecr-image" />
   </project>
 </manifest>

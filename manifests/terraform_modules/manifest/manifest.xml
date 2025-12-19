@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This manifest defines the behavior of terraform_module components, a dependency of
-    all TF modules
+    This manifest defines terraform_module component dependencies for all Terraform modules.
+    Files are copied (not symlinked) from component repositories into the consuming module.
+    Uses copyfile to avoid Windows symlink issues and simplify Git tracking.
 -->
 <manifest>
   <project name="lcaf-component-terraform" path="components/module" remote="launch-dso-platform" revision="refs/tags/1.1.0" dso_override_attribute_revision='${TERRAFORM_VER}'>
-    <linkfile src="linkfiles/Makefile" dest="components/Makefile" />
-    <linkfile src="linkfiles/.tflint.hcl" dest=".tflint.hcl" />
-    <linkfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
-    <linkfile src="linkfiles/.golangci.yaml" dest=".golangci.yaml" />
+    <copyfile src="linkfiles/Makefile" dest="components/Makefile" />
+    <copyfile src="linkfiles/.tflint.hcl" dest=".tflint.hcl" />
+    <copyfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
+    <copyfile src="linkfiles/.golangci.yaml" dest=".golangci.yaml" />
   </project>
   <project name="lcaf-component-policy" path="components/policy" remote="launch-dso-platform" revision="refs/tags/1.1.1" dso_override_attribute_revision='${POLICY_VER}'>
   </project>
