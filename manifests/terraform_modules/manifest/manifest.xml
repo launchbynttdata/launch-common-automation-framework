@@ -10,7 +10,6 @@
     <copyfile src="linkfiles/.tflint.hcl" dest=".tflint.hcl" />
     <copyfile src="linkfiles/.pre-commit-config.yaml" dest=".pre-commit-config.yaml" />
     <copyfile src="linkfiles/.golangci.yaml" dest=".golangci.yaml" />
-    <copyfile src="linkfiles/.secrets.baseline" dest=".secrets.baseline" />
   </project>
   <project name="lcaf-component-policy" path="components/policy" remote="launch-dso-platform" revision="refs/tags/1.1.1" dso_override_attribute_revision='${POLICY_VER}'>
   </project>
